@@ -1,1 +1,626 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gluten-Free Sushi Dinner at Tsuri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+* { box-sizing: border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8D5A3;
+  --gold-pale: #FAF5E9;
+  --black: #0f0f0f;
+  --near-black: #1a1a1a;
+  --text: #2a2a2a;
+  --muted: #7a7a7a;
+  --border: #e8e0d0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #ffffff;
+  color: var(--text);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+header {
+  background: var(--near-black);
+  color: white;
+  text-align: center;
+  padding: 70px 24px 60px;
+  border-bottom: 1px solid var(--gold);
+}
+
+.ornament {
+  font-size: 14px;
+  letter-spacing: 12px;
+  color: var(--gold);
+  margin-bottom: 22px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+  margin: 0 0 6px;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.gold-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 18px auto 22px;
+}
+
+header p {
+  font-size: 0.95rem;
+  color: #c8c8c8;
+  max-width: 640px;
+  margin: 0 auto 28px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.event-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(201,168,76,0.3);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.meta-item svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 48px 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 4px;
+  padding: 32px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--near-black);
+  letter-spacing: 0.03em;
+  margin-bottom: 16px;
+}
+
+.card h2::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 8px;
+}
+
+.highlight {
+  background: var(--gold-pale);
+  border-left: 3px solid var(--gold);
+  padding: 16px 18px;
+  border-radius: 0 4px 4px 0;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.menu-item:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-pale);
+}
+
+.menu-item.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-light);
+}
+
+.menu-item .img-placeholder {
+  width: 100%;
+  height: 220px;
+  background: #f0ece3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b0a898;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item .img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-content {
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.radio-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #c8bfaf;
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.menu-item.selected .radio-circle {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+
+.radio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  display: none;
+}
+
+.menu-item.selected .radio-dot { display: block; }
+
+.menu-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--near-black);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.menu-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.section-title {
+  margin-top: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--near-black);
+  letter-spacing: 0.03em;
+  margin-bottom: 20px;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  margin-top: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: var(--text);
+  background: white;
+  appearance: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-pale);
+}
+
+textarea { resize: vertical; min-height: 80px; }
+
+label.field-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0;
+  font-style: italic;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background: var(--gold);
+  color: var(--near-black);
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+button[type="submit"]:hover { background: #b8923e; }
+
+.success-screen {
+  display: none;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.success-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.error-msg {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 540px) {
+  .field-row { grid-template-columns: 1fr; }
+  .event-meta { gap: 16px; }
+  header h1 { font-size: 2rem; }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ornament">— ✦ —</div>
+  <h1>Gluten-Free Sushi Dinner at Tsuri</h1>
+  <div class="gold-rule"></div>
+  <p>Join Beyond Celiac Ambassadors Talia Abrahamson and Hayden Bishop for a special set-course dinner at Tsuri featuring its curated selection of celiac-safe, gluten-free Japanese dishes, available almost nowhere else. Thanks to Tsuri's dedicated gluten-free fryer, the menu spotlights crispy rice, tempura, specialty rolls and house-made gluten-free sauces. It is a delicious evening where the Los Angeles gluten-free community can finally relax and enjoy a safe, thoughtfully prepared meal together.</p>
+  <div class="event-meta">
+    <span class="meta-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Wednesday, July 1
+    </span>
+    <span class="meta-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      6:00 PM
+    </span>
+    <span class="meta-item">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Tsuri &bull; Melrose
+    </span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>About this event</h2>
+    <p>Join us for a special gluten-free dinner at Tsuri, featuring a menu designed to showcase the restaurant's incredible gluten-free offerings. From crispy rice and tempura to ponzu and fried ice cream, this meal highlights the creativity and care that make Tsuri a favorite among the gluten-free community.</p>
+    <div class="highlight">
+      <strong>Why Tsuri?</strong><br>
+      Tsuri has a dedicated gluten-free fryer and follows strict protocols to help prevent cross-contact in the kitchen.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Event details</h2>
+    <p><strong>Date:</strong> Wednesday, July 1</p>
+    <p><strong>Time:</strong> 6:00 PM</p>
+    <p style="margin-bottom:0;"><strong>Location:</strong> Tsuri &bull; 7015 Melrose Ave, Los Angeles, CA 90038</p>
+  </div>
+
+  <div class="card">
+    <h2>$60 dinner meal ticket includes</h2>
+    <ul>
+      <li>One drink ticket (soft drink, tea, or coffee)</li>
+      <li>Miso soup appetizer</li>
+      <li>Three spotlighted main dishes: crispy rice, tempura, signature roll with ponzu</li>
+      <li>Fried ice cream dessert</li>
+    </ul>
+    <p style="color:#6b7280; font-size:0.95rem; margin-bottom:0;">For each spotlighted dish, select your preferred option between fish or vegetarian.</p>
+  </div>
+
+  <form id="rsvp-form" novalidate>
+
+    <div id="guests-container"></div>
+
+    <div style="text-align:center; margin-bottom: 28px;">
+      <button type="button" id="add-guest-btn" onclick="addGuest()" style="background:white; color:var(--gold); border:1px solid var(--gold); border-radius:4px; padding:12px 28px; font-family:'Montserrat',sans-serif; font-size:0.8rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; cursor:pointer;">+ Add another guest</button>
+    </div>
+
+    <div class="card">
+      <h2>Optional</h2>
+      <p>Guests are welcome to order additional food and beverages from Tsuri's menu during the event.</p>
+      <p><strong>Any items ordered beyond the set menu will be paid for individually by the guest.</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>Additional comments</h2>
+      <textarea id="notes" name="notes" rows="4" placeholder="Seating preferences, dietary needs, anything else we should know…"></textarea>
+      <p class="small-note">Please submit your menu selections with your RSVP so we can prepare for the evening.</p>
+      <div class="error-msg" id="error-msg"></div>
+      <button type="submit">Confirm RSVP</button>
+    </div>
+
+  </form>
+
+  <div class="success-screen" id="success-screen">
+    <div class="card" style="max-width:480px; margin: 0 auto; text-align:center; padding: 3rem 2rem;">
+      <div class="success-icon" style="margin: 0 auto 1.5rem;">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="margin-top:0;">You're on the list</h2>
+      <p style="color:var(--muted);">Thank you for your RSVP. We look forward to welcoming you to the table.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Beyond Celiac Los Angeles
+</footer>
+
+<script>
+var guestCount = 0;
+
+var menuOptions = {
+  crispy_rice: [
+    { value: 'spicy_tuna', label: 'Crispy rice spicy tuna', img: 'images/crispy-rice-spicy-tuna.jpeg', alt: 'Crispy Rice Spicy Tuna' },
+    { value: 'avocado',    label: 'Crispy rice avocado', veg: true, img: 'images/crispy-rice-avocado.jpeg', alt: 'Crispy Rice Avocado' }
+  ],
+  tempura: [
+    { value: 'shrimp', label: 'Shrimp &amp; vegetable tempura', img: 'images/shrimp-tempura.jpeg', alt: 'Shrimp Tempura' },
+    { value: 'veg',    label: 'Vegetable tempura', veg: true, img: 'images/vegetable-tempura.jpg', alt: 'Vegetable Tempura' }
+  ],
+  roll: [
+    { value: 'yellowtail', label: 'Yellowtail lover roll with gluten-free ponzu', img: 'images/yellowtail-lover.jpg', alt: 'Yellowtail Lover Roll' },
+    { value: 'spicy_jake', label: 'Spicy &ldquo;Jake&rdquo; roll with gluten-free ponzu', veg: true, img: 'images/spicy-jake.jpg', alt: 'Spicy Jake Roll' }
+  ]
+};
+
+var courseTitles = {
+  crispy_rice: 'Gluten-free crispy rice',
+  tempura: 'Gluten-free tempura',
+  roll: 'Signature rolls featuring gluten-free ponzu'
+};
+
+function buildMenuCard(guestId, course) {
+  var options = menuOptions[course];
+  var items = options.map(function(opt) {
+    var vegTag = opt.veg ? ' <span style="font-weight:400;color:#b0a898;">(vegetarian)</span>' : '';
+    return '<div class="menu-item" data-guest="' + guestId + '" data-course="' + course + '" data-value="' + opt.value + '" onclick="selectItem(this)">' +
+      '<div class="img-placeholder"><img src="' + opt.img + '" alt="' + opt.alt + '" onerror="this.parentNode.innerHTML=\'' + opt.alt + '\'"></div>' +
+      '<div class="menu-content"><div class="radio-circle"><div class="radio-dot"></div></div>' +
+      '<div><div class="menu-label">' + opt.label + vegTag + '</div></div></div></div>';
+  }).join('');
+  return '<div class="card"><h2 class="section-title">' + courseTitles[course] + '</h2><div class="menu-grid">' + items + '</div></div>';
+}
+
+function addGuest() {
+  guestCount++;
+  var id = guestCount;
+  var isFirst = id === 1;
+
+  var removeBtn = isFirst ? '' :
+    '<button type="button" onclick="removeGuest(' + id + ')" style="float:right;background:none;border:none;color:var(--muted);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:\'Montserrat\',sans-serif;padding:0;">Remove</button>';
+
+  var guestLabel = isFirst ? 'Guest 1' : 'Guest ' + id;
+  var divider = isFirst ? '' : '<div style="height:1px;background:var(--border);margin:8px 0 24px;"></div>';
+
+  var html = divider +
+    '<div id="guest-block-' + id + '">' +
+    '<div class="card">' +
+    '<div style="overflow:hidden;">' + removeBtn +
+    '<h2 style="margin:0 0 4px;font-family:\'Cormorant Garamond\',serif;font-size:1.4rem;font-weight:500;color:var(--near-black);">' + guestLabel + '</h2></div>' +
+    '<div id="guest-name-display-' + id + '" style="font-size:0.8rem;color:var(--gold);letter-spacing:0.06em;margin-bottom:20px;min-height:18px;"></div>' +
+    '<div class="field-row">' +
+    '<div><label class="field-label">First name</label><input type="text" name="guest_' + id + '_fname" placeholder="First name" oninput="updateGuestLabel(' + id + ')" style="margin-bottom:0;"></div>' +
+    '<div><label class="field-label">Last name</label><input type="text" name="guest_' + id + '_lname" placeholder="Last name" oninput="updateGuestLabel(' + id + ')" style="margin-bottom:0;"></div>' +
+    '</div>' +
+    '<div style="margin-top:12px;"><label class="field-label">Email address</label><input type="email" name="guest_' + id + '_email" placeholder="email@example.com" style="margin-bottom:0;"></div>' +
+    '</div>' +
+    buildMenuCard(id, 'crispy_rice') +
+    buildMenuCard(id, 'tempura') +
+    buildMenuCard(id, 'roll') +
+    '</div>';
+
+  document.getElementById('guests-container').insertAdjacentHTML('beforeend', html);
+}
+
+function updateGuestLabel(id) {
+  var fname = document.querySelector('[name="guest_' + id + '_fname"]').value.trim();
+  var lname = document.querySelector('[name="guest_' + id + '_lname"]').value.trim();
+  var display = document.getElementById('guest-name-display-' + id);
+  var full = [fname, lname].filter(Boolean).join(' ');
+  display.textContent = full ? full.toUpperCase() : '';
+
+  var heading = document.querySelector('#guest-block-' + id + ' .card h2');
+  if (heading) heading.textContent = full || 'Guest ' + id;
+}
+
+function removeGuest(id) {
+  var block = document.getElementById('guest-block-' + id);
+  if (block) block.remove();
+}
+
+function selectItem(el) {
+  var course = el.dataset.course;
+  var guest = el.dataset.guest;
+  document.querySelectorAll('[data-guest="' + guest + '"][data-course="' + course + '"]').forEach(function(c) {
+    c.classList.remove('selected');
+  });
+  el.classList.add('selected');
+}
+
+document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var errEl = document.getElementById('error-msg');
+  var blocks = document.querySelectorAll('[id^="guest-block-"]');
+
+  if (blocks.length === 0) {
+    errEl.textContent = 'Please add at least one guest.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  var valid = true;
+  var errorMsg = '';
+
+  blocks.forEach(function(block) {
+    var id = block.id.replace('guest-block-', '');
+    var fname = block.querySelector('[name="guest_' + id + '_fname"]').value.trim();
+    var email = block.querySelector('[name="guest_' + id + '_email"]').value.trim();
+    var name = fname || ('Guest ' + id);
+
+    if (!fname || !email) {
+      errorMsg = 'Please enter a name and email for ' + name + '.';
+      valid = false; return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      errorMsg = 'Please enter a valid email address for ' + name + '.';
+      valid = false; return;
+    }
+    ['crispy_rice','tempura','roll'].forEach(function(course) {
+      if (!block.querySelector('[data-course="' + course + '"].selected')) {
+        errorMsg = 'Please make a menu selection for ' + name + ' (' + courseTitles[course] + ').';
+        valid = false;
+      }
+    });
+  });
+
+  if (!valid) {
+    errEl.textContent = errorMsg;
+    errEl.style.display = 'block';
+    errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  errEl.style.display = 'none';
+  document.getElementById('rsvp-form').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+addGuest();
+</script>
+</body>
+</html>
